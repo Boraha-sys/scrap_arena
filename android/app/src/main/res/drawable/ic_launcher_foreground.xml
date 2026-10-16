@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 임시 아이콘: 주황색 바퀴. 원하는 이미지로 바꾸려면 Android Studio > New > Image Asset -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFB21E"
+        android:fillType="evenOdd"
+        android:pathData="M54,26a28,28 0,1 1,0 56a28,28 0,1 1,0 -56zM54,37a17,17 0,1 0,0 34a17,17 0,1 0,0 -34z" />
+    <path
+        android:fillColor="#FFFFB21E"
+        android:pathData="M54,47a7,7 0,1 1,0 14a7,7 0,1 1,0 -14zM52,37h4v10h-4zM52,61h4v10h-4zM37,52h10v4h-10zM61,52h10v4h-10z" />
+    <path
+        android:fillColor="#FF3A4756"
+        android:pathData="M54,30l3,-4h-6zM54,78l3,4h-6zM30,54l-4,3v-6zM78,54l4,3v-6z" />
+</vector>

@@ -1,0 +1,52 @@
+{
+  "name": "scrap-arena",
+  "productName": "Scrap Arena",
+  "version": "1.0.0",
+  "description": "스크랩 아레나 (Indestructible 팬 리메이크)",
+  "main": "main.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "sync": "node ../tools/sync-www.js",
+    "prestart": "npm run sync",
+    "start": "electron .",
+    "predist": "npm run sync",
+    "dist": "electron-builder --win portable nsis",
+    "predist:dir": "npm run sync",
+    "dist:dir": "electron-builder --win dir"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.scraparena.game",
+    "productName": "Scrap Arena",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "icon.png",
+      "www/**/*"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "icon": "icon.png",
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "ScrapArena-${version}-portable.exe"
+    },
+    "nsis": {
+      "artifactName": "ScrapArena-${version}-setup.exe",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Scrap Arena"
+    }
+  }
+}

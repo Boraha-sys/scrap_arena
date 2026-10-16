@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.scraparena.game'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.scraparena.game'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    // 릴리스 서명: android/keystore.properties 가 있으면 사용 (README 참고)
+    def ksFile = rootProject.file('keystore.properties')
+    if (ksFile.exists()) {
+        def ks = new Properties()
+        ksFile.withInputStream { ks.load(it) }
+        signingConfigs {
+            release {
+                storeFile rootProject.file(ks['storeFile'])
+                storePassword ks['storePassword']
+                keyAlias ks['keyAlias']
+                keyPassword ks['keyPassword']
+            }
+        }
+        buildTypes.release.signingConfig signingConfigs.release
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // index.html 이 11MB 넘으므로 압축하지 않고 그대로 넣어 로딩을 빠르게
+    androidResources {
+        noCompress += ['html', 'js']
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+}
+
+// 빌드할 때마다 상위 폴더의 www/ (게임 본체)를 assets/www 로 복사
+def wwwSrc = file("$rootDir/../www")
+tasks.register('syncWww', Copy) {
+    from wwwSrc
+    into "$projectDir/src/main/assets/www"
+}
+preBuild.dependsOn 'syncWww'
